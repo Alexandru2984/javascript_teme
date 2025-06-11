@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    function sumEvenNumbers(numbers) {
+        return numbers.filter(num => num % 2 === 0).reduce((acc, num) => acc + num, 0);
+    }
+
+    console.log("Sum of even numbers:", sumEvenNumbers([14, 21,45, 40, 38, 44, 51, 63]));
+
+    
+    function filterLongWords(words) {
+    return words.filter(word => word.length > 5);
+    }
+
+    console.log("Words longer than 5 characters:", filterLongWords(["apple", "banana", "watermelon", "pear", "orange", "kiwi", "blueberries"])); 
+
+    function multiplyByIndex(numbers) {
+        return numbers.map((num, index) => num * index);
+    }
+
+    console.log("Numbers multiplied by their index:", multiplyByIndex([54, 101, 315, 120])); 
+
+    function commonElements(arr1, arr2) {
+        return arr1.filter(item => arr2.includes(item));
+    }
+
+    console.log("Common elements:", commonElements([1, 2, 3, 4, 5], [3, 4, 5, 6, 7, 8])); 
+
+    function averageAge(people) {
+        if (people.length === 0) {
+        return 0;
+        }
+        else {
+            let totalAge = people.reduce((sum, person) => sum + person.age, 0);
+            return totalAge / people.length;
+        }
+    }
+
+    console.log("Average age:", averageAge([
+    { name: "Adriana", age: 30 },
+    { name: "Alex", age: 25 },
+    { name: "Mihai", age: 35 },
+    { name: "Catalina", age: 25},
+    ]));
+
+
+    </script>
+</body>
+</html>

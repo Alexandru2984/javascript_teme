@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    // Array de numere pentru analiză
+    const numbers = [12, 7, 19, 23, 8, 10, 17, 22, 14, 9];
+
+    // Funcția pentru calcularea mediei
+    function calculateAverage(numbers) {
+        const sum = numbers.reduce((acc, num) => acc + num, 0);
+        return sum / numbers.length;
+    }
+
+    
+    function findMax(numbers) {
+        return Math.max(...numbers);
+    }
+
+    function findMin(numbers) {
+        return Math.min(...numbers);
+    }
+
+    
+    function calculateSum(numbers) {
+        return numbers.reduce((acc, num) => acc + num, 0);
+    }
+
+    
+    function filterEven(numbers) {
+        return numbers.filter(num => num % 2 === 0);
+    }
+
+    
+    console.log('Statistici pentru array-ul:', numbers);
+    console.log('Media:', calculateAverage(numbers));
+    console.log('Maximul:', findMax(numbers));
+    console.log('Minimul:', findMin(numbers));
+    console.log('Suma:', calculateSum(numbers));
+    console.log('Numere pare:', filterEven(numbers));
+
+    // Inventar inițial de produse
+    const inventory = [
+    { id: 1, name: 'Laptop', price: 2500, quantity: 5 },
+    { id: 2, name: 'Telefon', price: 1200, quantity: 10 },
+    { id: 3, name: 'Tabletă', price: 800, quantity: 8 }
+    ];
+
+    function addProduct(inventory, product) {
+    inventory.push(product);
+    }
+
+    
+    function findProduct(inventory, id) {
+    return inventory.find(item => item.id === id);
+    }
+
+    
+    function updateQuantity(inventory, id, newQuantity) {
+    const product = findProduct(inventory, id);
+    if (product) {
+        product.quantity = newQuantity;
+    } else {
+        console.log(`Produsul cu ID ${id} nu a fost găsit.`);
+    }
+    }
+
+    
+    function calculateTotalValue(inventory) {
+    return inventory.reduce((total, item) => total + item.price * item.quantity, 0);
+    }
+
+    
+    function deleteProduct(inventory, id) {
+    const index = inventory.findIndex(item => item.id === id);
+    if (index !== -1) {
+        inventory.splice(index, 1);
+        console.log(`Produsul cu ID ${id} a fost șters.`);
+    } else {
+        console.log(`Produsul cu ID ${id} nu a fost găsit.`);
+    }
+    }
+
+    console.log('Inventarul inițial:', inventory);
+
+    const newProduct = { id: 4, name: 'Monitor', price: 700, quantity: 3 };
+    addProduct(inventory, newProduct);
+    console.log('Inventar după adăugare:', inventory);
+
+    console.log('Produsul cu ID 2:', findProduct(inventory, 2));
+
+    updateQuantity(inventory, 3, 12);
+    console.log('Inventar după actualizare:', inventory);
+
+
+    deleteProduct(inventory, 2);
+    console.log('Inventar după ștergere:', inventory);
+
+
+    console.log('Valoarea totală a inventarului:', calculateTotalValue(inventory));
+
+
+    // Date despre studenți
+    const students = [
+    { name: 'Ana Ionescu', age: 21, average: 9.5 },
+    { name: 'Mihai Popescu', age: 22, average: 8.3 },
+    { name: 'Elena Dumitrescu', age: 20, average: 7.8 },
+    { name: 'Andrei Stanescu', age: 23, average: 6.4 },
+    { name: 'Maria Constantinescu', age: 21, average: 9.1 },
+    { name: 'Ion Vasilescu', age: 22, average: 5.2 },
+    { name: 'Ioana Munteanu', age: 20, average: 4.9 }
+    ];
+
+    // 1. Filtrează studenții care au note de trecere (peste 5)
+    const passingStudents = students.filter(student => student.average > 5);
+
+    // 2. Sortează studenții după medie, în ordine descrescătoare
+    const sortedStudents = [...students].sort((a, b) => b.average - a.average);
+
+    // 3. Transformă array-ul pentru a include doar numele și media
+    const nameAndAverage = students.map(student => ({
+    name: student.name,
+    average: student.average
+    }));
+
+    // 4. Calculează media generală a tuturor studenților
+    const overallAverage = students.reduce((acc, student) => acc + student.average, 0) / students.length;
+
+    // Afișarea rezultatelor
+    console.log('Studenți cu note de trecere:', passingStudents);
+    console.log('Studenți sortați după medie:', sortedStudents);
+    console.log('Nume și medie:', nameAndAverage);
+    console.log('Media generală:', overallAverage.toFixed(2));
+
+
+    // Clasa personalizată pentru erori de validare
+class ValidationError extends Error {
+  constructor(message, field) {
+    super(message);
+    this.name = 'ValidationError';
+    this.field = field;
+  }
+}
+
+// Funcția de validare
+    function validateUser(user) {
+    // Validare nume
+    if (typeof user.name !== 'string' || user.name.length < 3) {
+        throw new ValidationError("Numele trebuie să aibă cel puțin 3 caractere.", "name");
+    }
+
+    // Validare email
+    if (typeof user.email !== 'string' || !user.email.includes('@')) {
+        throw new ValidationError("Email-ul trebuie să conțină '@'.", "email");
+    }
+
+    // Validare vârstă
+    const ageNumber = Number(user.age);
+    if (isNaN(ageNumber) || ageNumber < 18 || ageNumber > 120) {
+        throw new ValidationError("Vârsta trebuie să fie un număr între 18 și 120.", "age");
+    }
+    }
+
+    // Teste pentru funcția de validare
+    const users = [
+    { name: 'Ana Popescu', email: 'ana@example.com', age: 25 },
+    { name: 'Io', email: 'ion-example.com', age: 17 },
+    { name: 'Maria Ionescu', email: 'maria@example.com', age: 130 },
+    { name: 'Gheorghe Popa', email: 'gheorghe@example.com', age: 'treizeci' }
+    ];
+
+    // Verifică fiecare utilizator
+    users.forEach((user, index) => {
+    console.log(`\nVerificare utilizator ${index + 1}:`, user);
+    try {
+        validateUser(user);
+        console.log('Utilizator valid!');
+    } catch (error) {
+        if (error instanceof ValidationError) {
+        console.log(`Eroare de validare pentru câmpul ${error.field}: ${error.message}`);
+        } else {
+        console.log(`Eroare neașteptată: ${error.message}`);
+        }
+    }
+    });
+
+    const taskManager = {
+    tasks: [],
+
+  // Adaugă o sarcină nouă
+    addTask(title, description, priority) {
+        if (!title || !description || typeof priority !== "number" || priority < 1 || priority > 3) {
+        throw new Error("Date invalide pentru sarcină.");
+        }
+
+        const id = this.tasks.length ? this.tasks[this.tasks.length - 1].id + 1 : 1;
+        if (this.tasks.some(task => task.id === id)) {
+        throw new Error("ID duplicat detectat!");
+        }
+
+        const newTask = {
+        id,
+        title,
+        description,
+        priority,
+        completed: false
+        };
+        this.tasks.push(newTask);
+    },
+
+    // Marchează o sarcină ca finalizată
+    completeTask(id) {
+        const task = this.tasks.find(task => task.id === id);
+        if (!task) {
+        throw new Error("Sarcina cu ID-ul specificat nu există.");
+        }
+        task.completed = true;
+    },
+
+    // Șterge o sarcină
+    deleteTask(id) {
+        const index = this.tasks.findIndex(task => task.id === id);
+        if (index === -1) {
+        throw new Error("Sarcina cu ID-ul specificat nu există.");
+        }
+        this.tasks.splice(index, 1);
+    },
+
+    // Filtrează sarcinile după stare
+    filterTasks(completed = true) {
+        return this.tasks.filter(task => task.completed === completed);
+    },
+
+    // Sortează sarcinile după prioritate (1 = mare, 3 = mică)
+    sortByPriority() {
+        return [...this.tasks].sort((a, b) => a.priority - b.priority);
+    },
+
+    // Calculează procentul de finalizare
+    completionPercentage() {
+        if (this.tasks.length === 0) return 0;
+        const completedCount = this.tasks.filter(task => task.completed).length;
+        return ((completedCount / this.tasks.length) * 100).toFixed(2);
+    }
+    };
+
+    // Testare funcționalități
+    try {
+    // Adăugare sarcini
+    taskManager.addTask("Învață JavaScript", "Studiază funcțiile, array-urile și obiectele", 1);
+    taskManager.addTask("Cumpărături", "Lapte, pâine, ouă", 2);
+    taskManager.addTask("Plimbare", "30 minute în parc", 3);
+    console.log('Sarcini inițiale:', taskManager.tasks);
+
+    // Marchează o sarcină ca finalizată
+    taskManager.completeTask(2);
+    console.log('După finalizare:', taskManager.tasks);
+
+    // Sortare după prioritate
+    const sortedTasks = taskManager.sortByPriority();
+    console.log('Sarcini sortate după prioritate:', sortedTasks);
+
+    // Filtrare sarcini finalizate
+    const completedTasks = taskManager.filterTasks(true);
+    console.log('Sarcini finalizate:', completedTasks);
+
+    // Procentaj finalizare
+    console.log('Procent de finalizare:', taskManager.completionPercentage() + '%');
+
+    // Ștergere sarcină
+    taskManager.deleteTask(1);
+    console.log('După ștergere:', taskManager.tasks);
+
+
+    } catch (error) {
+    console.error('A apărut o eroare:', error.message);
+    }
+
+    
+    </script>
+</body>
+</html>

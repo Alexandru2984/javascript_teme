@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+
+        function theBiggest(num1, num2, num3) {
+            return Math.max(num1, num2, num3);
+        }
+    console.log("The biggest is:", theBiggest(10, 25, 7));
+    str = "elefaccafele";
+    function reverse(str) {
+        return str.split('').reverse().join('');
+    }
+    console.log("Reversed string:", reverse(str));
+    const numbers = [2,7,1,9,17,37,99,200,21,93,108];
+    function filterEvenNumbers(numbers) {
+        return numbers.filter(num => num % 2 === 0);
+    }
+    console.log("Even numbers:", filterEvenNumbers(numbers));
+
+
+    const times = 9;
+    function repeat(str, times) {
+        return str.repeat(times);
+    }
+    console.log("Repeated string:", repeat(str, times));
+
+    function fibonacci(n) {
+        if (n <= 1) {
+            return n;
+            }
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+
+    function printFibonacciUpTo(n) {
+        for (let i = 0; i <= n; i++) {
+            console.log("F(" + i + ") = " + fibonacci(i));
+        }
+    }
+
+    printFibonacciUpTo(times);
+    </script>
+</body>
+</html>
